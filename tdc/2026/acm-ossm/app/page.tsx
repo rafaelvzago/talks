@@ -77,7 +77,7 @@ export default function Home() {
     setReduced(reduce);
     const ctx=gsap.context(()=>{
       if(reduce){
-        gsap.set(".anim,.trust-node,.remote,.summary,.request-line,.response-line",{autoAlpha:1,y:0,scale:1});
+        gsap.set(".anim,.trust-node,.remote,.summary,.request-line,.response-line,.gateway-caption",{autoAlpha:1,y:0,scale:1});
         gsap.set(".draw",{strokeDasharray:1,strokeDashoffset:0});
         gsap.set(".packet",{autoAlpha:0});
         setProgress(100); setActive(5); return;
@@ -87,7 +87,7 @@ export default function Home() {
       gsap.set(".node,.operator,.apps,.app-node,.mesh-badge",{autoAlpha:0,y:14});
       gsap.set(".trust-node,.summary",{autoAlpha:0,y:12,scale:.97,transformOrigin:"50% 50%"});
       gsap.set(".draw",{strokeDasharray:1,strokeDashoffset:1});
-      gsap.set(".request-line,.response-line",{autoAlpha:0});
+      gsap.set(".request-line,.response-line,.gateway-caption",{autoAlpha:0});
       gsap.set(".packet",{autoAlpha:0,x:0,y:0});
       gsap.set(".mesh-link",{autoAlpha:0});
 
@@ -120,34 +120,37 @@ export default function Home() {
         .to(".control-node .node-box",{stroke:"#c7c7c7",fill:"#fff",strokeWidth:2,duration:.4,stagger:.08},6.85)
         .to(".control-node,.remote",{opacity:.35,duration:.3},7.6)
         .to(".gateway-node,.apps,.east-sleep,.west-product",{opacity:1,duration:.3},7.6)
+        .to(".gateway-caption",{autoAlpha:1,duration:.3},7.6)
         .to(".req-1",{autoAlpha:1,duration:.01},7.6)
-        .to(".req-1",{strokeDashoffset:0,duration:.4,ease:"power1.inOut"},7.6)
-        .to(".req-2",{autoAlpha:1,duration:.01},8.05)
-        .to(".req-2",{strokeDashoffset:0,duration:.5,ease:"power1.inOut"},8.05)
-        .to(".req-3",{autoAlpha:1,duration:.01},8.6)
-        .to(".req-3",{strokeDashoffset:0,duration:.4,ease:"power1.inOut"},8.6)
+        .to(".req-1",{strokeDashoffset:0,duration:.35,ease:"power1.inOut"},7.6)
+        .to(".req-2",{autoAlpha:1,duration:.01},8.0)
+        .to(".req-2",{strokeDashoffset:0,duration:.5,ease:"power1.inOut"},8.0)
+        .to(".req-3",{autoAlpha:1,duration:.01},8.55)
+        .to(".req-3",{strokeDashoffset:0,duration:.45,ease:"power1.inOut"},8.55)
         .to(".east-sleep .app-box",{stroke:"#ee0000",fill:"#fff0f0",strokeWidth:3,duration:.25},7.6)
         .to(".request-packet",{autoAlpha:1,duration:.01},7.7)
-        .to(".request-packet",{y:66,duration:.3},7.7)
-        .to(".gateway-node .node-box",{stroke:"#ee0000",fill:"#fff0f0",strokeWidth:3.5,duration:.28,stagger:.08},8.05)
-        .to(".request-packet",{x:-420,y:66,duration:.4,ease:"none"},8.1)
-        .to(".request-packet",{x:-840,y:66,duration:.4,ease:"none"},8.5)
-        .to(".request-packet",{x:-840,y:0,duration:.25},8.9)
-        .to(".west-product .app-box",{stroke:"#ee0000",fill:"#fff0f0",strokeWidth:3,duration:.25},8.9)
+        .to(".request-packet",{y:-182,duration:.3},7.7)
+        .to(".gateway-node .node-box",{stroke:"#ee0000",fill:"#fff0f0",strokeWidth:3.5,duration:.28,stagger:.08},8.0)
+        .to(".request-packet",{x:-535,y:-182,duration:.45,ease:"none"},8.05)
+        .to(".request-packet",{x:-535,y:-84,duration:.18},8.55)
+        .to(".request-packet",{x:-825,y:-84,duration:.25,ease:"none"},8.75)
+        .to(".request-packet",{x:-825,y:0,duration:.2},9.0)
+        .to(".west-product .app-box",{stroke:"#ee0000",fill:"#fff0f0",strokeWidth:3,duration:.25},9.0)
         .to(".request-packet",{autoAlpha:0,duration:.18},10.85)
         .to(".res-1",{autoAlpha:1,duration:.01},11.6)
         .to(".res-1",{strokeDashoffset:0,duration:.4,ease:"power1.inOut"},11.6)
         .to(".res-2",{autoAlpha:1,duration:.01},12.05)
         .to(".res-2",{strokeDashoffset:0,duration:.5,ease:"power1.inOut"},12.05)
         .to(".res-3",{autoAlpha:1,duration:.01},12.6)
-        .to(".res-3",{strokeDashoffset:0,duration:.4,ease:"power1.inOut"},12.6)
+        .to(".res-3",{strokeDashoffset:0,duration:.35,ease:"power1.inOut"},12.6)
         .to(".response-packet",{autoAlpha:1,duration:.01},11.7)
-        .to(".response-packet",{y:106,duration:.3},11.7)
-        .to(".response-packet",{x:420,y:106,duration:.4,ease:"none"},12.1)
-        .to(".response-packet",{x:840,y:106,duration:.4,ease:"none"},12.5)
-        .to(".response-packet",{x:840,y:0,duration:.25},12.9)
+        .to(".response-packet",{y:-84,duration:.2},11.7)
+        .to(".response-packet",{x:290,y:-84,duration:.22,ease:"none"},11.9)
+        .to(".response-packet",{x:290,y:-147,duration:.18},12.15)
+        .to(".response-packet",{x:855,y:-147,duration:.45,ease:"none"},12.35)
+        .to(".response-packet",{x:855,y:0,duration:.3},12.85)
         .to(".response-packet",{autoAlpha:0,duration:.18},14.55)
-        .to(".node,.trust-node,.operator,.apps,.app-node,.mesh-badge,.remote",{opacity:1,duration:.4},15.2)
+        .to(".node,.trust-node,.operator,.apps,.app-node,.mesh-badge,.remote,.gateway-caption",{opacity:1,duration:.4},15.2)
         .to(".req-1,.req-2,.req-3,.res-1,.res-2,.res-3,.discovery-line",{opacity:.16,duration:.4},15.2)
         .to(".mesh-link",{autoAlpha:1,strokeDashoffset:0,duration:.8,ease:"power1.inOut"},15.3)
         .to(".mesh-box",{fill:"#fff0f0",stroke:"#ee0000",strokeWidth:2.5,duration:.35,stagger:.08},15.45)
@@ -215,18 +218,18 @@ export default function Home() {
           <g className="remote"><rect x="650" y="604" width="300" height="108" rx="18" className="node-box remote-box"/><rect x="674" y="649" width="30" height="27" rx="4" className="lock"/><path d="M679 649V640A10 10 0 0 1 699 640V649" className="shackle"/><text x="722" y="651" className="node-title">Remote secrets</text><text x="722" y="681" className="node-sub">service discovery</text></g>
           <path pathLength="1" d="M1405 582V658H950" className="draw discovery-line" markerEnd="url(#arrow)"/><path pathLength="1" d="M650 658H220V582" className="draw discovery-line" markerEnd="url(#arrow)"/>
 
-          <path pathLength="1" d="M1055 702V768" className="draw request-line req-1"/>
-          <path pathLength="1" d="M1055 768H215" className="draw request-line req-2" markerEnd="url(#arrow)"/>
-          <path pathLength="1" d="M215 768V702" className="draw request-line req-3" markerEnd="url(#arrow)"/>
-          <path pathLength="1" d="M245 702V808" className="draw response-line res-1"/>
-          <path pathLength="1" d="M245 808H1085" className="draw response-line res-2" markerEnd="url(#arrow-dark)"/>
-          <path pathLength="1" d="M1085 808V702" className="draw response-line res-3" markerEnd="url(#arrow-dark)"/>
-          <circle cx="1055" cy="702" r="11" className="packet request-packet"/><circle cx="245" cy="702" r="11" className="packet response-packet"/>
+          <path pathLength="1" d="M1055 702V520" className="draw request-line req-1"/>
+          <path pathLength="1" d="M1055 520H520" className="draw request-line req-2" markerEnd="url(#arrow)"/>
+          <path pathLength="1" d="M520 520V618H230V702" className="draw request-line req-3" markerEnd="url(#arrow)"/>
+          <path pathLength="1" d="M230 702V618H520V555" className="draw response-line res-1"/>
+          <path pathLength="1" d="M520 555H1085" className="draw response-line res-2" markerEnd="url(#arrow-dark)"/>
+          <path pathLength="1" d="M1085 555V702" className="draw response-line res-3" markerEnd="url(#arrow-dark)"/>
           <g className="gateway-caption">
-            <rect x="684" y="498" width="232" height="56" rx="16" className="gateway-caption-box" filter="url(#shadow)"/>
-            <text x="800" y="520" textAnchor="middle" className="gateway-caption-text">15443 • TLS passthrough</text>
-            <text x="800" y="540" textAnchor="middle" className="gateway-caption-text">workload mTLS preserved</text>
+            <rect x="684" y="458" width="232" height="48" rx="14" className="gateway-caption-box" filter="url(#shadow)"/>
+            <text x="800" y="478" textAnchor="middle" className="gateway-caption-text">15443 • TLS passthrough</text>
+            <text x="800" y="496" textAnchor="middle" className="gateway-caption-text">workload mTLS preserved</text>
           </g>
+          <circle cx="1055" cy="702" r="11" className="packet request-packet"/><circle cx="230" cy="702" r="11" className="packet response-packet"/>
 
           <path pathLength="1" d="M375 878H1225" className="draw mesh-link"/>
           <g className="mesh-badge"><rect x="220" y="862" width="320" height="34" rx="17" className="mesh-box"/><text x="380" y="885" textAnchor="middle" className="mesh-label">Istio mesh ID: bookinfo-mesh</text></g>
