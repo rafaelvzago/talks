@@ -13,14 +13,14 @@ description: >
 
 1. Count current sections:
    ```
-   grep -c '<section class="slide"' claude-code-open-source.html
+   grep -c '<section class="slide"' ai/claude-code/claude-code-open-source.html
    ```
 
 2. Make the slide changes (insert, remove, or move `<section>` elements)
 
 3. Recount sections and map new indices:
    ```
-   grep -n '<section class="slide"' claude-code-open-source.html | awk -F: '{print NR-1, $0}'
+   grep -n '<section class="slide"' ai/claude-code/claude-code-open-source.html | awk -F: '{print NR-1, $0}'
    ```
 
 4. Update ALL `goTo(N)` in the agenda to match new indices

@@ -30,22 +30,22 @@ description: >
 
    a. Balanced sections in both slide files:
    ```
-   grep -c '<section class="slide"' claude-code-open-source.html
-   grep -c '</section>' claude-code-open-source.html
-   grep -c '<section class="slide"' claude-code-open-source-en.html
-   grep -c '</section>' claude-code-open-source-en.html
+   grep -c '<section class="slide"' ai/claude-code/claude-code-open-source.html
+   grep -c '</section>' ai/claude-code/claude-code-open-source.html
+   grep -c '<section class="slide"' ai/claude-code/claude-code-open-source-en.html
+   grep -c '</section>' ai/claude-code/claude-code-open-source-en.html
    ```
    All 4 values must be equal.
 
    b. `preventDefault` intact (exactly 7 per file):
    ```
-   grep -c 'preventDefault' claude-code-open-source.html
-   grep -c 'preventDefault' claude-code-open-source-en.html
+   grep -c 'preventDefault' ai/claude-code/claude-code-open-source.html
+   grep -c 'preventDefault' ai/claude-code/claude-code-open-source-en.html
    ```
 
    c. No unaccented PT-BR words:
    ```
-   rg '\b(codigo|voce|nao|sessao|verificacao|implementacao|automacao|seguranca)\b' claude-code-open-source.html
+   rg '\b(codigo|voce|nao|sessao|verificacao|implementacao|automacao|seguranca)\b' ai/claude-code/claude-code-open-source.html
    ```
    Must return zero results.
 
@@ -72,7 +72,7 @@ description: >
 
    | Scope      | Files                                                     |
    |------------|-----------------------------------------------------------|
-   | `slides`   | claude-code-open-source.html, claude-code-open-source-en.html |
+   | `slides`   | ai/claude-code/claude-code-open-source.html, ai/claude-code/claude-code-open-source-en.html |
    | `landing`  | index.html                                                |
    | `docs`     | README.md, CONTRIBUTING.md, AGENTS.md, CLAUDE.md          |
    | `skills`   | .claude/skills/**                                         |

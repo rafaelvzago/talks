@@ -6,8 +6,8 @@ Arquivos HTML auto-contidos com tema terminal Catppuccin Macchiato.
 
 ## Estrutura
 - index.html -- landing page
-- claude-code-open-source.html -- slides PT-BR (33 slides)
-- claude-code-open-source-en.html -- slides EN (33 slides)
+-- ai/claude-code/claude-code-open-source.html -- slides PT-BR (33 slides)
+-- ai/claude-code/claude-code-open-source-en.html -- slides EN (33 slides)
 - .claude/ -- skills, commands, settings
 
 ## Comandos
@@ -21,3 +21,17 @@ Arquivos HTML auto-contidos com tema terminal Catppuccin Macchiato.
 - Ambos os idiomas devem estar sincronizados
 - Acentos corretos em PT-BR
 - Não modificar: CNAME, LICENSE
+
+## Agent skills
+
+### Issue tracker
+
+GitHub Issues via `gh`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default five roles (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context. See `docs/agents/domain.md`.

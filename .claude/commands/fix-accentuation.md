@@ -6,7 +6,7 @@ Corrige acentuação PT-BR nos slides. Busca palavras sem acento no texto visív
 
 1. Buscar palavras sem acento no arquivo PT-BR:
    ```
-   rg -in '\b(codigo|codigos|voce|nao|sessao|sessoes|secao|secoes|verificacao|verificacoes|tambem|alem|ate|pagina|paginas|unico|unica|valido|valida|obrigatorio|obrigatoria|automatico|automatica|modulo|modulos|proximo|proxima|inicio|indice|indices|possivel|possiveis|necessario|necessaria|basico|basica|metodo|metodos|titulo|titulos|topico|topicos|especifico|especifica|estrategia|estrategias|pratica|praticas|tecnica|tecnicas|logica|logicas|analise|analises|arvore|arvores|numero|numeros|conteudo|conteudos|revisao|revisoes|critico|critica|diagnostico|diagnosticos|agentico|agentica|seguranca|producao|informacao|informacoes|aplicacao|aplicacoes|integracao|integracoes|solucao|solucoes|funcao|funcoes|execucao|configuracao|configuracoes|operacao|operacoes|referencia|referencias|experiencia|experiencias|consequencia|consequencias|apresentacao|eficiencia|frequencia|frequencias|instancia|instancias|dependencia|dependencias)\b' claude-code-open-source.html
+   rg -in '\b(codigo|codigos|voce|nao|sessao|sessoes|secao|secoes|verificacao|verificacoes|tambem|alem|ate|pagina|paginas|unico|unica|valido|valida|obrigatorio|obrigatoria|automatico|automatica|modulo|modulos|proximo|proxima|inicio|indice|indices|possivel|possiveis|necessario|necessaria|basico|basica|metodo|metodos|titulo|titulos|topico|topicos|especifico|especifica|estrategia|estrategias|pratica|praticas|tecnica|tecnicas|logica|logicas|analise|analises|arvore|arvores|numero|numeros|conteudo|conteudos|revisao|revisoes|critico|critica|diagnostico|diagnosticos|agentico|agentica|seguranca|producao|informacao|informacoes|aplicacao|aplicacoes|integracao|integracoes|solucao|solucoes|funcao|funcoes|execucao|configuracao|configuracoes|operacao|operacoes|referencia|referencias|experiencia|experiencias|consequencia|consequencias|apresentacao|eficiencia|frequencia|frequencias|instancia|instancias|dependencia|dependencias)\b' ai/claude-code/claude-code-open-source.html
    ```
 
 2. Para cada ocorrência, verificar que está em texto visível (não em `<script>`, `<style>`, atributos ou `<code>` com comandos)
@@ -15,7 +15,7 @@ Corrige acentuação PT-BR nos slides. Busca palavras sem acento no texto visív
 
 4. Verificar integridade do JavaScript:
    ```
-   grep -c 'preventDefault' claude-code-open-source.html
+   grep -c 'preventDefault' ai/claude-code/claude-code-open-source.html
    ```
    Deve ser exatamente 4.
 

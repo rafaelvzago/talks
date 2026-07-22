@@ -9,7 +9,7 @@ skills:
   - fix-accentuation
 ---
 
-You fix missing accents in the PT-BR slide file `claude-code-open-source.html`.
+You fix missing accents in the PT-BR slide file `ai/claude-code/claude-code-open-source.html`.
 
 ## Rules
 
