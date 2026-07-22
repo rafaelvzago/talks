@@ -7,10 +7,12 @@ alwaysApply: true
 
 Before non-trivial work in this repo, read and follow:
 
-1. [`docs/agents/sdlc.md`](docs/agents/sdlc.md) — grill → to-spec → to-tickets → implement → ship
+1. [`docs/agents/sdlc.md`](docs/agents/sdlc.md) — grill → to-spec → to-tickets → implement → **local preview (agent runs dev env)** → ship
 2. [`docs/agents/issue-tracker.md`](docs/agents/issue-tracker.md) — GitHub Issues via `gh`
 3. [`docs/agents/triage-labels.md`](docs/agents/triage-labels.md)
 4. [`docs/agents/domain.md`](docs/agents/domain.md)
+
+Before opening a PR: start the local preview server yourself, give the human the URL, wait for approval.
 
 Root `CLAUDE.md` / `AGENTS.md` add local commands only; they do not override the playbook.
 

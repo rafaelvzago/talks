@@ -5,6 +5,8 @@
 - Abrir: `xdg-open index.html`
 - OSSM: `cd tdc/2026/acm-ossm && npm ci && npm test`
 - Painel: `cd tdc/2026/painel-cloud && npm ci && npm test`
+- Preview app (dev): `cd tdc/2026/acm-ossm && npm ci && npm run dev` → `http://localhost:<port>/tdc/2026/acm-ossm/`
+- Preview site (Pages artifact): `node scripts/assemble-site.mjs _site && python3 -m http.server 8080 -d _site`
 
 ## Regras
 - Não modificar LICENSE
@@ -16,7 +18,9 @@
 - **NUNCA fazer `git push`**, mesmo que o usuário peça (exceto quando o humano autorizar explicitamente um override nesta sessão)
 - Antes de qualquer commit que toque slides Claude, rodar as verificações abaixo
 - Commits só depois que as verificações relevantes passarem
-- Feature branch → PR → merge na default branch
+- Feature branch → **agent starts local preview** → human approval → PR → merge na default branch
+- **Não abrir PR** até o humano confirmar preview local (`docs/agents/sdlc.md` §4)
+- No passo de local preview, o agente **sobe o dev/server** (não só cola o comando) e passa a URL
 
 ## Verificações (slides Claude)
 1. Sections:
@@ -43,6 +47,6 @@
 
 ## Agent skills
 
-- **SDLC (required):** `docs/agents/sdlc.md` — grill → to-spec → to-tickets → implement → ship
+- **SDLC (required):** `docs/agents/sdlc.md` — grill → to-spec → to-tickets → implement → local preview → ship
 - Issue tracker / triage / domain: `docs/agents/`
 - Skill bodies live at user level (`~/.cursor/skills/` / `~/.claude/skills/`) — do not vendor them into this repo

@@ -67,18 +67,49 @@ Every ticket body includes: What to build, Acceptance criteria, Blocked by.
 
 1. **Build** — `implement` + `tdd` at agreed seams only
 2. **Review** — show the diff to the human; run `code-review` (HITL)
-3. **Track** — update repo-root `PROGRESS.md`; close the ticket issue
-4. **Handoff** — at ~50% of tickets or end of a phase, run `handoff` → `/tmp/handoff-<slug>.md`
-5. **Next** — next unblocked ticket (fan out independent tickets to subagents when useful)
+3. **Local preview (required)** — the agent **starts the local preview server** (do not only paste commands), gives the human the URL, and **waits for explicit approval** before Ship. Do not open a PR, push for review, or merge until they confirm.
+4. **Track** — update repo-root `PROGRESS.md`; close the ticket issue
+5. **Handoff** — at ~50% of tickets or end of a phase, run `handoff` → `/tmp/handoff-<slug>.md`
+6. **Next** — next unblocked ticket (fan out independent tickets to subagents when useful)
+
+#### Local preview — agent must run the env
+
+1. Check existing terminals; reuse a healthy preview server if it already serves the right app/path.
+2. Otherwise start the narrowest useful preview in the background (`block_until_ms: 0`), wait until it is ready, and report the exact URL (including `basePath` and the port Next chose if 3000 was busy).
+3. Ask the human to review at that URL and **stop** until they approve (or request changes).
+
+Commands (pick one):
+
+```bash
+# Single TDC app (preferred for app-only changes; basePath included)
+cd tdc/2026/acm-ossm && npm ci && npm run dev
+# → http://localhost:<port>/tdc/2026/acm-ossm/
+# or: cd tdc/2026/painel-cloud && npm ci && npm run dev
+
+# Full GitHub Pages artifact (catalog + both apps / production paths)
+node scripts/assemble-site.mjs _site
+python3 -m http.server 8080 -d _site
+# → http://localhost:8080/ …
+
+# Static catalog / Claude slides only
+python3 -m http.server 8080
+# → http://localhost:8080/ or /ai/claude-code/
+```
+
+Docs-only changes: show the diff / relevant markdown paths instead of starting a server, still wait for approval.
 
 Hard rules:
 
 - Every ticket **must** be a tracker issue **before** coding starts
 - Never push directly to the default branch — feature branch → PR → merge
-- If the user says proceed without approval between tickets, run the loop sequentially
+- **Never open a PR until the human has previewed locally and approved**
+- **Agent runs the preview env** (dev server or static server); do not leave “run this yourself” as the default
+- If the user says proceed without approval between tickets, run the loop sequentially (local preview still required before Ship unless they explicitly waive it)
 - Prefer the smallest correct change
 
 ### 5. Ship
+
+Only after local preview approval:
 
 1. Open a PR against the project's primary forge
 2. Merge to the default branch
