@@ -31,11 +31,11 @@ description: >
 
 2. **Gather actual state** — run all in parallel:
    ```
-   grep -c '<section class="slide"' claude-code-open-source.html
-   grep -c '<section class="slide"' claude-code-open-source-en.html
+   grep -c '<section class="slide"' ai/claude-code/claude-code-open-source.html
+   grep -c '<section class="slide"' ai/claude-code/claude-code-open-source-en.html
    ```
    ```
-   grep -oP '(?<=<h1[^>]*>)[^<]+' claude-code-open-source.html
+   grep -oP '(?<=<h1[^>]*>)[^<]+' ai/claude-code/claude-code-open-source.html
    ```
    ```
    ls .claude/skills/

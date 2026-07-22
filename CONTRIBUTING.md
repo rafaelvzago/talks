@@ -7,8 +7,8 @@
 3. Faça suas alterações nos HTMLs
 4. Verifique que as sections estão balanceadas:
    ```bash
-   grep -c '<section class="slide"' claude-code-open-source.html
-   grep -c '</section>' claude-code-open-source.html
+   grep -c '<section class="slide"' ai/claude-code/claude-code-open-source.html
+   grep -c '</section>' ai/claude-code/claude-code-open-source.html
    ```
 5. Se alterou o PT-BR, atualize o EN também (e vice-versa)
 6. Abra um PR com descrição do que mudou

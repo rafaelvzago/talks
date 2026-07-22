@@ -20,22 +20,22 @@
 ## Verificações obrigatórias (antes de commit)
 1. Sections balanceadas em ambos os arquivos:
    ```
-   grep -c '<section class="slide"' claude-code-open-source.html
-   grep -c '</section>' claude-code-open-source.html
-   grep -c '<section class="slide"' claude-code-open-source-en.html
-   grep -c '</section>' claude-code-open-source-en.html
+   grep -c '<section class="slide"' ai/claude-code/claude-code-open-source.html
+   grep -c '</section>' ai/claude-code/claude-code-open-source.html
+   grep -c '<section class="slide"' ai/claude-code/claude-code-open-source-en.html
+   grep -c '</section>' ai/claude-code/claude-code-open-source-en.html
    ```
    Todos os 4 valores devem ser iguais.
 
 2. `preventDefault` intacto (exatamente 7 por arquivo):
    ```
-   grep -c 'preventDefault' claude-code-open-source.html
-   grep -c 'preventDefault' claude-code-open-source-en.html
+   grep -c 'preventDefault' ai/claude-code/claude-code-open-source.html
+   grep -c 'preventDefault' ai/claude-code/claude-code-open-source-en.html
    ```
 
 3. Sem palavras PT-BR sem acento:
    ```
-   rg '\b(codigo|voce|nao|sessao|verificacao|implementacao|automacao|seguranca)\b' claude-code-open-source.html
+   rg '\b(codigo|voce|nao|sessao|verificacao|implementacao|automacao|seguranca)\b' ai/claude-code/claude-code-open-source.html
    ```
    Deve retornar zero resultados.
 

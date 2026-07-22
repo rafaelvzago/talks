@@ -8,19 +8,19 @@ description: >
 
 # Fix PT-BR Accentuation Skill
 
-Corrige palavras sem acento no arquivo `claude-code-open-source.html`.
+Corrige palavras sem acento no arquivo `ai/claude-code/claude-code-open-source.html`.
 Atua **apenas no texto visível** (conteúdo entre tags HTML), nunca em JavaScript, CSS, atributos HTML, URLs ou nomes de arquivo.
 
 ## Workflow
 
 1. Extrair o texto visível do arquivo PT-BR (ignorar `<script>`, `<style>`, atributos):
    ```
-   grep -n '[^>]*' claude-code-open-source.html
+   grep -n '[^>]*' ai/claude-code/claude-code-open-source.html
    ```
 
 2. Buscar palavras sem acento usando a lista de referência abaixo:
    ```
-   rg -in '\b(codigo|codigos|voce|nao|sessao|sessoes|verificacao|verificacoes|tambem|alem|ate|pagina|paginas|unico|unica|unicos|unicas|valido|valida|validos|validas|obrigatorio|obrigatoria|obrigatorios|obrigatorias|automatico|automatica|automaticos|automaticas|modulo|modulos|proximo|proxima|proximos|proximas|inicio|indice|indices|possivel|possiveis|necessario|necessaria|necessarios|necessarias|basico|basica|basicos|basicas|metodo|metodos|titulo|titulos|topico|topicos|especifico|especifica|especificos|especificas|estrategia|estrategias|pratica|praticas|tecnica|tecnicas|logica|logicas|analise|analises|arvore|arvores|numero|numeros|conteudo|conteudos|revisao|revisoes|secao|secoes|critico|critica|criticos|criticas|diagnostico|diagnosticos|linguistico|linguistica|linguisticos|linguisticas|agentico|agentica|agenticos|agenticas|seguranca|producao|informacao|informacoes|aplicacao|aplicacoes|integracao|integracoes|solucao|solucoes|funcao|funcoes|execucao|configuracao|configuracoes|operacao|operacoes|referencia|referencias|experiencia|experiencias|consequencia|consequencias|apresentacao|eficiencia|frequencia|frequencias|instancia|instancias|dependencia|dependencias)\b' claude-code-open-source.html
+   rg -in '\b(codigo|codigos|voce|nao|sessao|sessoes|verificacao|verificacoes|tambem|alem|ate|pagina|paginas|unico|unica|unicos|unicas|valido|valida|validos|validas|obrigatorio|obrigatoria|obrigatorios|obrigatorias|automatico|automatica|automaticos|automaticas|modulo|modulos|proximo|proxima|proximos|proximas|inicio|indice|indices|possivel|possiveis|necessario|necessaria|necessarios|necessarias|basico|basica|basicos|basicas|metodo|metodos|titulo|titulos|topico|topicos|especifico|especifica|especificos|especificas|estrategia|estrategias|pratica|praticas|tecnica|tecnicas|logica|logicas|analise|analises|arvore|arvores|numero|numeros|conteudo|conteudos|revisao|revisoes|secao|secoes|critico|critica|criticos|criticas|diagnostico|diagnosticos|linguistico|linguistica|linguisticos|linguisticas|agentico|agentica|agenticos|agenticas|seguranca|producao|informacao|informacoes|aplicacao|aplicacoes|integracao|integracoes|solucao|solucoes|funcao|funcoes|execucao|configuracao|configuracoes|operacao|operacoes|referencia|referencias|experiencia|experiencias|consequencia|consequencias|apresentacao|eficiencia|frequencia|frequencias|instancia|instancias|dependencia|dependencias)\b' ai/claude-code/claude-code-open-source.html
    ```
 
 3. Para cada ocorrência encontrada, verificar que está em texto visível (não em `<script>`, `<style>`, atributos `class=`, `id=`, `onclick=`, `href=`, `<code>` com comandos, etc.)
@@ -29,7 +29,7 @@ Atua **apenas no texto visível** (conteúdo entre tags HTML), nunca em JavaScri
 
 5. Verificar que `preventDefault` continua intacto (exatamente 7 ocorrências):
    ```
-   grep -c 'preventDefault' claude-code-open-source.html
+   grep -c 'preventDefault' ai/claude-code/claude-code-open-source.html
    ```
 
 6. Reportar as correções feitas
@@ -101,7 +101,7 @@ Atua **apenas no texto visível** (conteúdo entre tags HTML), nunca em JavaScri
 
 ## Rules
 
-- Atuar APENAS no arquivo PT-BR (`claude-code-open-source.html`)
+- Atuar APENAS no arquivo PT-BR (`ai/claude-code/claude-code-open-source.html`)
 - Nunca modificar conteúdo dentro de `<script>` ou `<style>`
 - Nunca modificar atributos HTML (`class`, `id`, `onclick`, `href`, `style`)
 - Nunca modificar URLs, nomes de arquivo ou nomes de comando

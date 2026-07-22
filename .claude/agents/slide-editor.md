@@ -16,7 +16,7 @@ You edit slides in both PT-BR and EN HTML files for this presentation project.
 
 ## Rules
 
-- Always update BOTH `claude-code-open-source.html` (PT-BR) and `claude-code-open-source-en.html` (EN)
+- Always update BOTH `ai/claude-code/claude-code-open-source.html` (PT-BR) and `ai/claude-code/claude-code-open-source-en.html` (EN)
 - After any change, verify sections are balanced: `<section>` count must equal `</section>` count
 - `preventDefault` must remain intact: exactly **7 occurrences** per slide file
 - Update ALL `goTo(N)` in the agenda to match new slide indices
