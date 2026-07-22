@@ -32,7 +32,7 @@ const blocks: Block[] = [
       },
       {
         id: "q2",
-        text: "Quando alguém diz “vamos escalar”, o que vocês olham primeiro: throughput da aplicação, limites da infra, ou o blast radius de uma falha?",
+        text: "Quando alguém diz “vamos escalar”, o que vocês olham primeiro: throughput da aplicação, limites da infra, ou o orçamento de infra?",
       },
       {
         id: "q3",
