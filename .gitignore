@@ -1,4 +1,5 @@
 .scratch/
+_site/
 node_modules/
 .next/
 out/

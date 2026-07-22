@@ -15,6 +15,14 @@ Presentations and talk material by **Rafael Zago** (Senior Software Automation E
 
 ## Run locally
 
+## Assemble (Pages artifact)
+
+```bash
+node scripts/assemble-site.mjs _site
+# or SKIP_BUILD=1 if both apps already have out/
+```
+
+
 ```bash
 git clone git@github.com:rafaelvzago/talks.git
 cd talks
