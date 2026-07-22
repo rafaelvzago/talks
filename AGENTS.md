@@ -42,4 +42,7 @@
 - Cores via CSS variables `--ctp-*`
 
 ## Agent skills
-See `docs/agents/` (issue tracker, triage labels, domain docs).
+
+- **SDLC (required):** `docs/agents/sdlc.md` — grill → to-spec → to-tickets → implement → ship
+- Issue tracker / triage / domain: `docs/agents/`
+- Skill bodies live at user level (`~/.cursor/skills/` / `~/.claude/skills/`) — do not vendor them into this repo

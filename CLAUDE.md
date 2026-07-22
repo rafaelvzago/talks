@@ -25,6 +25,10 @@ Catálogo de palestras e material de apoio (HTML estático + apps Next.js export
 
 ## Agent skills
 
+### SDLC (required)
+
+Follow `docs/agents/sdlc.md` — grill → to-spec → to-tickets → implement loop → ship. Do not invent a parallel process. Skills live at user level (`~/.cursor/skills/` / `~/.claude/skills/`); do not vendor skill bodies here.
+
 ### Issue tracker
 
 GitHub Issues via `gh`. See `docs/agents/issue-tracker.md`.
