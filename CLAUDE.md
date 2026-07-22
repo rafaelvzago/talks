@@ -1,26 +1,27 @@
-# Claude Code para Desenvolvimento Open Source
+# Talks
 
 ## Sobre este projeto
-Apresentação e material de referência para palestras sobre Claude Code.
-Arquivos HTML auto-contidos com tema terminal Catppuccin Macchiato.
+Catálogo de palestras e material de apoio (HTML estático + apps Next.js exportados para GitHub Pages).
 
 ## Estrutura
-- index.html -- landing page
--- ai/claude-code/claude-code-open-source.html -- slides PT-BR (33 slides)
--- ai/claude-code/claude-code-open-source-en.html -- slides EN (33 slides)
+- index.html -- catálogo de talks
+- ai/claude-code/ -- slides Claude Code (PT-BR + EN) e PRD do talk
+- tdc/2026/acm-ossm/ -- fluxo OSSM multi-cluster (Next)
+- tdc/2026/painel-cloud/ -- painel TDC 2026 (Next)
+- docs/agents/ -- binding do issue tracker
 - .claude/ -- skills, commands, settings
 
 ## Comandos
-- Abrir no navegador: `xdg-open index.html`
-- Servir local: `python3 -m http.server 8080`
+- Abrir catálogo: `xdg-open index.html` ou `python3 -m http.server 8080`
+- OSSM: `cd tdc/2026/acm-ossm && npm ci && npm test`
+- Painel: `cd tdc/2026/painel-cloud && npm ci && npm test`
 
 ## Convenções
-- HTML puro, sem frameworks, sem build step
-- CSS embutido, tema Catppuccin Macchiato
-- Navegação por setas do teclado
-- Ambos os idiomas devem estar sincronizados
-- Acentos corretos em PT-BR
-- Não modificar: CNAME, LICENSE
+- Domínio: `talks.rafaelvzago.com` (arquivo `CNAME`)
+- Slides Claude: HTML puro, tema Catppuccin Macchiato, PT-BR e EN sincronizados
+- Apps TDC: Next static export com `basePath` por URL pública
+- Não modificar: LICENSE
+- Feature branch → PR → merge (não push direto em `main`)
 
 ## Agent skills
 

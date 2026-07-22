@@ -1,66 +1,48 @@
-# Claude Code for Open Source Development
+# Talks
 
-Material I use in my talks and in my actual day-to-day workflow with Claude Code for open source projects.
+Presentations and talk material by **Rafael Zago** (Senior Software Automation Engineer, Red Hat).
 
-**Rafael Zago** · Senior Software Automation Engineer · Red Hat
+**Live:** [talks.rafaelvzago.com](https://talks.rafaelvzago.com)
 
 ## What's inside
 
-- Presentation in **PT-BR** and **EN** (33 slides each)
-- Terminal theme with the Catppuccin Macchiato palette
-- Examples of AGENTS.md, Skills, Commands, PRD and Spec
-- Full workflow: Spec Driven Dev → PRD → Plan → TDD → Review → MCP
-
-## View online
-
-**[claude.rafaelvzago.com](https://claude.rafaelvzago.com)**
+| Path | Content |
+|------|---------|
+| `/` | Talks catalog (PT/EN) |
+| `/ai/claude-code/` | Claude Code for open source — HTML slides (PT-BR + EN) |
+| `/tdc/2026/acm-ossm/` | OSSM multi-cluster interactive flow (Next.js) |
+| `/tdc/2026/painel-cloud/` | TDC Floripa 2026 panel runbook (Next.js) |
 
 ## Run locally
 
 ```bash
-git clone git@github.com:rafaelvzago/claude-ai-slides.git
-cd claude-ai-slides
+git clone git@github.com:rafaelvzago/talks.git
+cd talks
 python3 -m http.server 8080
 # open http://localhost:8080
+```
+
+For TDC Next apps:
+
+```bash
+cd tdc/2026/acm-ossm && npm ci && npm run dev
+# or
+cd tdc/2026/painel-cloud && npm ci && npm run dev
 ```
 
 ## Repository structure
 
 ```
-claude-ai-slides/
-├── CLAUDE.md                       # project conventions (auto-read by agent)
-├── AGENTS.md                       # agent rules
-├── CONTRIBUTING.md                  # how to contribute
-├── README.md                       # this file
-├── index.html                      # landing page
-├── claude-code-open-source.html    # slides PT-BR
-├── claude-code-open-source-en.html # slides EN
-├── docs/
-│   ├── architecture.md             # technical decisions
-│   └── PRD.md                      # product requirements document
-├── .claude/
-│   ├── settings.json               # permissions and hooks
-│   ├── commands/
-│   │   ├── commit.md               # /commit — conventional commit workflow
-│   │   ├── fix-accentuation.md     # /fix-accentuation — fix PT-BR accents
-│   │   ├── review-slides.md        # /review-slides — review slide integrity
-│   │   └── update-readme.md        # /update-readme — sync README structure tree
-│   └── skills/
-│       ├── commit/
-│       │   └── SKILL.md            # conventional commits with pre-commit checks
-│       ├── fix-accentuation/
-│       │   └── SKILL.md            # correct PT-BR accentuation in slides
-│       ├── update-readme/
-│       │   └── SKILL.md            # sync README tree with filesystem
-│       ├── update-slides/
-│       │   └── SKILL.md            # add, remove, or reorder slides
-│       └── translate/
-│           └── SKILL.md            # sync translations between PT-BR and EN
-├── CNAME                           # GitHub Pages domain
-└── LICENSE                         # Apache 2.0
+talks/
+├── index.html                 # catalog
+├── CNAME                      # talks.rafaelvzago.com
+├── ai/claude-code/            # Claude Code slides + talk PRD
+├── tdc/2026/acm-ossm/         # OSSM flow (Next)
+├── tdc/2026/painel-cloud/     # Panel runbook (Next)
+├── docs/agents/               # issue tracker binding
+├── CLAUDE.md / AGENTS.md
+└── LICENSE                    # Apache 2.0
 ```
-
-This repo is both the presentation and an example of what it teaches.
 
 ## License
 
