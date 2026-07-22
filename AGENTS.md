@@ -1,47 +1,45 @@
 # AGENTS.md
 
 ## Comandos de setup
-- Servir localmente: `python3 -m http.server 8080`
+- Servir catálogo: `python3 -m http.server 8080`
 - Abrir: `xdg-open index.html`
+- OSSM: `cd tdc/2026/acm-ossm && npm ci && npm test`
+- Painel: `cd tdc/2026/painel-cloud && npm ci && npm test`
 
 ## Regras
-- Não modificar CNAME nem LICENSE
-- Manter ambos os idiomas sincronizados (PT-BR e EN)
-- HTML auto-contido, sem dependências externas (exceto Google Fonts)
-- `preventDefault` no JavaScript deve permanecer intacto
-- Verificar sections balanceadas após qualquer edição
+- Não modificar LICENSE
+- Domínio em `CNAME`: `talks.rafaelvzago.com`
+- Manter PT-BR e EN dos slides Claude sincronizados
+- HTML Claude auto-contido; apps TDC via Next static export
+- `preventDefault` no JavaScript dos decks Claude deve permanecer intacto
+- Verificar sections balanceadas após editar slides Claude
+- **NUNCA fazer `git push`**, mesmo que o usuário peça (exceto quando o humano autorizar explicitamente um override nesta sessão)
+- Antes de qualquer commit que toque slides Claude, rodar as verificações abaixo
+- Commits só depois que as verificações relevantes passarem
+- Feature branch → PR → merge na default branch
 
-## Git
-- **NUNCA fazer `git push`**, mesmo que o usuário peça
-- Antes de qualquer commit, rodar TODAS as verificações abaixo
-- Se alguma verificação falhar, corrigir antes de commitar
-- Commits só depois que tudo passar
-
-## Verificações obrigatórias (antes de commit)
-1. Sections balanceadas em ambos os arquivos:
-   ```
-   grep -c '<section class="slide"' ai/claude-code/claude-code-open-source.html
-   grep -c '</section>' ai/claude-code/claude-code-open-source.html
-   grep -c '<section class="slide"' ai/claude-code/claude-code-open-source-en.html
-   grep -c '</section>' ai/claude-code/claude-code-open-source-en.html
-   ```
-   Todos os 4 valores devem ser iguais.
-
-2. `preventDefault` intacto (exatamente 7 por arquivo):
-   ```
-   grep -c 'preventDefault' ai/claude-code/claude-code-open-source.html
-   grep -c 'preventDefault' ai/claude-code/claude-code-open-source-en.html
-   ```
-
+## Verificações (slides Claude)
+1. Sections:
+ ```
+ grep -c '<section class="slide"' ai/claude-code/claude-code-open-source.html
+ grep -c '</section>' ai/claude-code/claude-code-open-source.html
+ grep -c '<section class="slide"' ai/claude-code/claude-code-open-source-en.html
+ grep -c '</section>' ai/claude-code/claude-code-open-source-en.html
+ ```
+2. `preventDefault` (exatamente 7 por arquivo):
+ ```
+ grep -c 'preventDefault' ai/claude-code/claude-code-open-source.html
+ grep -c 'preventDefault' ai/claude-code/claude-code-open-source-en.html
+ ```
 3. Sem palavras PT-BR sem acento:
-   ```
-   rg '\b(codigo|voce|nao|sessao|verificacao|implementacao|automacao|seguranca)\b' ai/claude-code/claude-code-open-source.html
-   ```
-   Deve retornar zero resultados.
-
-4. Ambos os arquivos têm o mesmo número de slides.
+ ```
+ rg '\b(codigo|voce|nao|sessao|verificacao|implementacao|automacao|seguranca)\b' ai/claude-code/claude-code-open-source.html
+ ```
 
 ## Estilo
 - Tema: Catppuccin Macchiato
 - Fonte: JetBrains Mono
-- Todas as cores via CSS variables `--ctp-*`
+- Cores via CSS variables `--ctp-*`
+
+## Agent skills
+See `docs/agents/` (issue tracker, triage labels, domain docs).

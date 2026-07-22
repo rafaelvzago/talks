@@ -1,15 +1,15 @@
 # Progress — talks migration
 
-Parent: [#1 PRD: Talks site migration](https://github.com/rafaelvzago/talks/issues/1)
+Parent: [#1 PRD](https://github.com/rafaelvzago/talks/issues/1)
 
 | Ticket | Status | Notes |
 |--------|--------|-------|
-| #2 Scaffold Claude | in progress | `ai/claude-code/` + path updates |
-| #3 Vendor OSSM | in progress | `tdc/2026/acm-ossm` from flow/, no painel |
-| #4 Landing index | blocked by #2 | |
-| #5 Painel-cloud | blocked by #3 | |
-| #6 Docs + CNAME | blocked by #2 | |
-| #7 Pages workflow | blocked by #2–#5 | |
+| #2 Scaffold Claude | done | [PR #9](https://github.com/rafaelvzago/talks/pull/9) |
+| #3 Vendor OSSM | done | [PR #9](https://github.com/rafaelvzago/talks/pull/9) |
+| #4 Landing index | in progress | category catalog |
+| #5 Painel-cloud | in progress | separate Next app |
+| #6 Docs + CNAME | in progress | CNAME already talks.*; docs rewrite |
+| #7 Pages workflow | blocked by #4–#5 | |
 | #8 Ship | blocked by #6–#7 | |
 
-Branch: `feat/talks-2-3-scaffold-ossm`
+Branch: `feat/talks-4-5-6-landing-painel-docs`

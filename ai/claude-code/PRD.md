@@ -4,7 +4,7 @@
 
 Self-contained HTML slide deck used by Rafael Zago (Senior Software Automation Engineer, Red Hat) in talks about using Claude Code for open source development. The presentation itself is built with the same practices it teaches: CLAUDE.md, AGENTS.md, skills, commands, and hooks.
 
-**Live site:** [claude.rafaelvzago.com](https://claude.rafaelvzago.com)
+**Live site:** [talks.rafaelvzago.com/ai/claude-code](https://talks.rafaelvzago.com/ai/claude-code)
 **License:** Apache 2.0
 
 ## Problem

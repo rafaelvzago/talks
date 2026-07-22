@@ -11,8 +11,8 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Code — presentations & best practices</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='20' y='30' width='60' height='45' rx='10' fill='%238aadf4'/><rect x='30' y='45' width='12' height='12' rx='3' fill='%2324273a'/><rect x='58' y='45' width='12' height='12' rx='3' fill='%2324273a'/><rect x='40' y='62' width='20' height='4' rx='2' fill='%2324273a'/><rect x='42' y='15' width='16' height='18' rx='4' fill='%23a6da95'/><rect x='48' y='5' width='4' height='12' fill='%23a6da95'/><circle cx='50' cy='3' r='4' fill='%23a6da95'/><rect x='10' y='45' width='10' height='5' rx='2' fill='%238aadf4'/><rect x='80' y='45' width='10' height='5' rx='2' fill='%238aadf4'/><rect x='30' y='75' width='12' height='12' rx='2' fill='%238aadf4'/><rect x='58' y='75' width='12' height='12' rx='2' fill='%238aadf4'/></svg>">
+<title>Talks — Rafael Zago</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='20' y='30' width='60' height='45' rx='10' fill='%238aadf4'/><rect x='30' y='45' width='12' height='12' rx='3' fill='%2324273a'/><rect x='58' y='45' width='12' height='12' rx='3' fill='%2324273a'/><rect x='40' y='62' width='20' height='4' rx='2' fill='%2324273a'/><rect x='42' y='15' width='16' height='18' rx='4' fill='%23a6da95'/><rect x='48' y='5' width='4' height='12' fill='%23a6da95'/><circle cx='50' cy='3' r='4' fill='%23a6da95'/></svg>">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -51,21 +51,16 @@ strong { color: var(--ctp-peach); }
 .dot-green { background: var(--ctp-green); }
 .terminal-title { color: var(--ctp-overlay1); margin-left: 12px; font-size: 12px; }
 .terminal-body { padding: 32px 40px; }
-.ascii-art {
-  color: var(--ctp-green); font-size: 0.55em; line-height: 1.2;
-  white-space: pre; font-family: 'JetBrains Mono', monospace;
-  text-align: center; margin-bottom: 24px;
-}
 header { text-align: center; padding-bottom: 16px; border-bottom: 1px solid var(--ctp-surface0); margin-bottom: 32px; }
-header h1 { color: var(--ctp-blue); font-size: 1.6em; margin-bottom: 4px; }
-header .sub { color: var(--ctp-mauve); font-size: 0.9em; font-weight: 400; margin-bottom: 12px; }
+header h1 { color: var(--ctp-blue); font-size: 1.8em; margin-bottom: 4px; }
+header .sub { color: var(--ctp-mauve); font-size: 0.95em; font-weight: 400; margin-bottom: 12px; }
 header .author { color: var(--ctp-overlay1); font-size: 0.85em; }
-section { margin-bottom: 32px; }
+section { margin-bottom: 36px; }
 section h2 {
-  color: var(--ctp-blue); font-size: 1.2em; margin-bottom: 16px;
+  color: var(--ctp-blue); font-size: 1.15em; margin-bottom: 16px;
   padding-bottom: 6px; border-bottom: 2px solid var(--ctp-surface0);
 }
-.cards { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .card {
   background: var(--ctp-mantle); border: 1px solid var(--ctp-surface0);
   border-radius: 8px; padding: 20px; transition: all 0.2s;
@@ -75,15 +70,11 @@ section h2 {
   border-color: var(--ctp-blue); transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(138,173,244,0.15); text-decoration: none;
 }
-.card .flag { font-size: 2em; margin-bottom: 8px; display: block; }
-.card h3 { color: var(--ctp-blue); font-size: 1.1em; margin-bottom: 4px; }
-.card .meta { color: var(--ctp-overlay0); font-size: 0.8em; margin-bottom: 8px; }
+.card .flag { font-size: 1.6em; margin-bottom: 8px; display: block; }
+.card h3 { color: var(--ctp-blue); font-size: 1.05em; margin-bottom: 4px; }
+.card .meta { color: var(--ctp-overlay0); font-size: 0.78em; margin-bottom: 8px; }
 .card p { color: var(--ctp-subtext1); font-size: 0.85em; }
 .about-text { color: var(--ctp-subtext1); font-size: 0.9em; margin-bottom: 12px; }
-.ref-group { margin-bottom: 16px; }
-.ref-group h3 { color: var(--ctp-sapphire); font-size: 0.9em; margin-bottom: 6px; }
-.ref-group ul { list-style: none; margin: 0; padding: 0; }
-.ref-group li { padding: 4px 0; font-size: 0.82em; }
 footer {
   text-align: center; padding: 20px 0; margin-top: 16px;
   border-top: 1px solid var(--ctp-surface0);
@@ -102,7 +93,6 @@ footer a { color: var(--ctp-overlay0); }
 @media (max-width: 700px) {
   .cards { grid-template-columns: 1fr; }
   .terminal-body { padding: 20px; }
-  .ascii-art { font-size: 0.35em; }
 }
 </style>
 </head>
@@ -111,7 +101,7 @@ footer a { color: var(--ctp-overlay0); }
 <div class="terminal-window">
   <div class="terminal-bar">
     <div class="terminal-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
-    <span class="terminal-title">claude ~ /presentations</span>
+    <span class="terminal-title">talks ~ /presentations</span>
     <div class="lang-toggle">
       <button onclick="setLang('pt')" id="btn-pt" class="lang-btn active" title="Português">🇧🇷</button>
       <button onclick="setLang('en')" id="btn-en" class="lang-btn" title="English">🇺🇸</button>
@@ -119,71 +109,56 @@ footer a { color: var(--ctp-overlay0); }
   </div>
   <div class="terminal-body">
 
-    <div class="ascii-art">
- ██████╗██╗      █████╗ ██╗   ██╗██████╗ ███████╗     ██████╗ ██████╗ ██████╗ ███████╗
-██╔════╝██║     ██╔══██╗██║   ██║██╔══██╗██╔════╝    ██╔════╝██╔═══██╗██╔══██╗██╔════╝
-██║     ██║     ███████║██║   ██║██║  ██║█████╗      ██║     ██║   ██║██║  ██║█████╗
-██║     ██║     ██╔══██║██║   ██║██║  ██║██╔══╝      ██║     ██║   ██║██║  ██║██╔══╝
-╚██████╗███████╗██║  ██║╚██████╔╝██████╔╝███████╗    ╚██████╗╚██████╔╝██████╔╝███████╗
- ╚═════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝     ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝</div>
-
     <header>
-      <h1 data-lang="pt">Claude Code para desenvolvimento open source</h1>
-      <h1 data-lang="en">Claude Code for open source development</h1>
+      <h1>Talks</h1>
+      <p class="sub" data-lang="pt">Apresentações e material de palestras</p>
+      <p class="sub" data-lang="en">Presentations and talk material</p>
       <p class="author"><strong>Rafael Zago</strong> · Senior Software Automation Engineer · Red Hat</p>
     </header>
 
     <section>
-      <p class="about-text" data-lang="pt">Eu uso Claude Code no dia a dia para trabalhar em projetos open source na Red Hat. Esses slides são o material que eu uso nas minhas palestras e o que aplico no meu fluxo de trabalho real. Eu atualizo conforme descubro coisas novas ou o ecossistema muda.</p>
-      <p class="about-text" data-lang="en">I use Claude Code daily for open source work at Red Hat. These slides are what I use in my talks and what I actually apply in my day-to-day workflow. I update this as I find new things or the ecosystem changes.</p>
+      <p class="about-text" data-lang="pt">Catálogo das minhas palestras e demos — AI, TDC e outros eventos. HTML estático e apps interativos, servidos em <strong>talks.rafaelvzago.com</strong>.</p>
+      <p class="about-text" data-lang="en">Catalog of my talks and demos — AI, TDC, and other events. Static HTML and interactive apps, served at <strong>talks.rafaelvzago.com</strong>.</p>
       <p class="about-text" style="color:var(--ctp-overlay0); font-size:0.8em;">Apache License 2.0</p>
     </section>
 
     <section>
-      <h2 data-lang="pt">Apresentações</h2>
-      <h2 data-lang="en">Presentations</h2>
+      <h2 data-lang="pt">AI</h2>
+      <h2 data-lang="en">AI</h2>
       <div class="cards">
         <a class="card" href="ai/claude-code/claude-code-open-source.html#start" data-lang="pt">
           <span class="flag">🇧🇷</span>
-          <h3>Português</h3>
-          <p class="meta">33 slides · Catppuccin Macchiato</p>
-          <p>Como eu organizo meu fluxo de trabalho: do PRD ao PR, passando por TDD, code review e MCP.</p>
+          <h3>Claude Code para open source</h3>
+          <p class="meta">Slides · PT-BR</p>
+          <p>Do PRD ao PR: TDD, code review, skills, hooks e MCP.</p>
         </a>
         <a class="card" href="ai/claude-code/claude-code-open-source-en.html#start" data-lang="en">
           <span class="flag">🇺🇸</span>
-          <h3>English</h3>
-          <p class="meta">33 slides · Catppuccin Macchiato</p>
-          <p>How I organize my workflow: from PRD to PR, through TDD, code review and MCP.</p>
+          <h3>Claude Code for open source</h3>
+          <p class="meta">Slides · EN</p>
+          <p>From PRD to PR: TDD, code review, skills, hooks, and MCP.</p>
         </a>
       </div>
     </section>
 
     <section>
-      <h2 data-lang="pt">Referências</h2>
-      <h2 data-lang="en">References</h2>
-      <div class="ref-group">
-        <h3>Docs</h3>
-        <ul>
-          <li><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank">Claude Code Overview</a></li>
-          <li><a href="https://code.claude.com/docs/en/best-practices" target="_blank">Best Practices</a></li>
-          <li><a href="https://code.claude.com/docs/en/hooks-guide" target="_blank">Hooks Guide</a></li>
-          <li><a href="https://code.claude.com/docs/en/sub-agents" target="_blank">Subagents</a></li>
-          <li><a href="https://code.claude.com/docs/en/commands" target="_blank">Commands</a></li>
-          <li><a href="https://code.claude.com/docs/en/github-actions" target="_blank">GitHub Actions</a></li>
-          <li><a href="https://agents.md" target="_blank">AGENTS.md</a></li>
-          <li><a href="https://github.com/anthropics/skills" target="_blank">anthropics/skills</a></li>
-        </ul>
-      </div>
-      <div class="ref-group">
-        <h3 data-lang="pt">Projetos</h3>
-        <h3 data-lang="en">Projects</h3>
-        <ul>
-          <li><a href="https://github.com/anthropics/claude-code" target="_blank">Claude Code</a> · 117K+ ⭐</li>
-          <li><a href="https://github.com/anthropics/claude-code-action" target="_blank">claude-code-action</a> · 7.2K ⭐</li>
-          <li><a href="https://github.com/pcoulbourne/everything-claude-code" target="_blank">Everything Claude Code</a> · 140K+ ⭐</li>
-          <li><a href="https://github.com/TommasoBagassi/code-reviewer" target="_blank">Code-Reviewer Plugin</a></li>
-          <li><a href="https://githubnext.com/projects/agentic-workflows/" target="_blank">GitHub Next Agentic Workflows</a></li>
-        </ul>
+      <h2 data-lang="pt">TDC 2026</h2>
+      <h2 data-lang="en">TDC 2026</h2>
+      <div class="cards">
+        <a class="card" href="tdc/2026/acm-ossm/">
+          <h3 data-lang="pt">OSSM multi-cluster flow</h3>
+          <h3 data-lang="en">OSSM multi-cluster flow</h3>
+          <p class="meta">Interactive · Next.js</p>
+          <p data-lang="pt">Diagrama animado do OpenShift Service Mesh 3 em multi-cluster.</p>
+          <p data-lang="en">Animated OpenShift Service Mesh 3 multi-cluster diagram.</p>
+        </a>
+        <a class="card" href="tdc/2026/painel-cloud/">
+          <h3 data-lang="pt">Painel — arquitetura resiliente</h3>
+          <h3 data-lang="en">Panel — resilient architecture</h3>
+          <p class="meta">Runbook · TDC Floripa</p>
+          <p data-lang="pt">Roteiro e timing do painel sob pressão na trilha de cloud.</p>
+          <p data-lang="en">Moderator runbook and timing for the cloud-track panel.</p>
+        </a>
       </div>
     </section>
 
