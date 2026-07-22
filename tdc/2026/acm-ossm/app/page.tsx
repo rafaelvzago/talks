@@ -129,12 +129,13 @@ export default function Home() {
         .to(".req-3",{strokeDashoffset:0,duration:.45,ease:"power1.inOut"},8.55)
         .to(".east-sleep .app-box",{stroke:"#ee0000",fill:"#fff0f0",strokeWidth:3,duration:.25},7.6)
         .to(".request-packet",{autoAlpha:1,duration:.01},7.7)
-        .to(".request-packet",{y:-182,duration:.3},7.7)
+        .to(".request-packet",{x:10,y:-72,duration:.3},7.7)
         .to(".gateway-node .node-box",{stroke:"#ee0000",fill:"#fff0f0",strokeWidth:3.5,duration:.28,stagger:.08},8.0)
-        .to(".request-packet",{x:-535,y:-182,duration:.45,ease:"none"},8.05)
-        .to(".request-packet",{x:-535,y:-84,duration:.18},8.55)
-        .to(".request-packet",{x:-825,y:-84,duration:.25,ease:"none"},8.75)
-        .to(".request-packet",{x:-825,y:0,duration:.2},9.0)
+        .to(".request-packet",{x:10,y:-127,duration:.18},8.05)
+        .to(".request-packet",{x:-415,y:-127,duration:.45,ease:"none"},8.25)
+        .to(".request-packet",{x:-550,y:-127,duration:.15},8.7)
+        .to(".request-packet",{x:-550,y:-72,duration:.15},8.85)
+        .to(".request-packet",{x:-840,y:0,duration:.25},9.0)
         .to(".west-product .app-box",{stroke:"#ee0000",fill:"#fff0f0",strokeWidth:3,duration:.25},9.0)
         .to(".request-packet",{autoAlpha:0,duration:.18},10.85)
         .to(".res-1",{autoAlpha:1,duration:.01},11.6)
@@ -144,11 +145,11 @@ export default function Home() {
         .to(".res-3",{autoAlpha:1,duration:.01},12.6)
         .to(".res-3",{strokeDashoffset:0,duration:.35,ease:"power1.inOut"},12.6)
         .to(".response-packet",{autoAlpha:1,duration:.01},11.7)
-        .to(".response-packet",{y:-84,duration:.2},11.7)
-        .to(".response-packet",{x:290,y:-84,duration:.22,ease:"none"},11.9)
-        .to(".response-packet",{x:290,y:-147,duration:.18},12.15)
-        .to(".response-packet",{x:855,y:-147,duration:.45,ease:"none"},12.35)
-        .to(".response-packet",{x:855,y:0,duration:.3},12.85)
+        .to(".response-packet",{y:-123,duration:.25},11.7)
+        .to(".response-packet",{x:320,y:-123,duration:.3,ease:"none"},11.95)
+        .to(".response-packet",{x:610,y:-123,duration:.45,ease:"none"},12.25)
+        .to(".response-packet",{x:610,y:0,duration:.25},12.7)
+        .to(".response-packet",{x:630,y:0,duration:.15},12.95)
         .to(".response-packet",{autoAlpha:0,duration:.18},14.55)
         .to(".node,.trust-node,.operator,.apps,.app-node,.mesh-badge,.remote,.gateway-caption",{opacity:1,duration:.4},15.2)
         .to(".req-1,.req-2,.req-3,.res-1,.res-2,.res-3,.discovery-line",{opacity:.16,duration:.4},15.2)
@@ -193,48 +194,56 @@ export default function Home() {
           <rect width="1600" height="960" rx="30" fill="#fbfbfb"/><rect width="1600" height="10" rx="5" fill="#ee0000"/>
           <g className="title-group"><text x="55" y="65" className="svg-kicker">OPENSHIFT SERVICE MESH 3</text><text x="55" y="110" className="svg-title">Multi-Cluster Request Flow</text><text x="1545" y="68" textAnchor="end" className="svg-meta">OSSM 3 • SAIL OPERATOR • ISTIO</text></g>
 
-          <path pathLength="1" d="M800 199V220H340V245" className="draw trust-line"/><path pathLength="1" d="M800 220H1260V245" className="draw trust-line"/>
+          <g className="layer-trust-lines">
+            <path pathLength="1" d="M800 199V220H340V245" className="draw trust-line"/>
+            <path pathLength="1" d="M800 220H1260V245" className="draw trust-line"/>
+          </g>
           <Cert x={650} y={137} width={300} label="Shared Root CA" root/><Cert x={150} y={245} width={380} label="Intermediate CA — west"/><Cert x={1070} y={245} width={380} label="Intermediate CA — east"/>
           <text x="800" y="327" textAnchor="middle" className="trust-caption trust-node">Shared trust enables mTLS between clusters</text>
 
           <g className="cluster west"><rect x="55" y="345" width="650" height="500" rx="28" className="cluster-box"/><OssmMark x={80} y={372}/><text x="147" y="397" className="cluster-title">Cluster West</text><text x="147" y="429" className="cluster-sub">west-network</text></g>
           <g className="cluster east"><rect x="895" y="345" width="650" height="500" rx="28" className="cluster-box"/><OssmMark x={920} y={372}/><text x="987" y="397" className="cluster-title">Cluster East</text><text x="987" y="429" className="cluster-sub">east-network</text></g>
-          <Operator x={154} y={444}/><Operator x={1339} y={444}/><Control x={105} y={472}/><Gateway x={385} y={472}/><Gateway x={945} y={472}/><Control x={1290} y={472}/>
-
           <g className="apps"><rect x="105" y="607" width="550" height="125" rx="18" className="apps-box"/><text x="380" y="638" textAnchor="middle" className="apps-title">Applications</text></g>
           <g className="apps"><rect x="945" y="607" width="550" height="125" rx="18" className="apps-box"/><text x="1220" y="638" textAnchor="middle" className="apps-title">Applications</text></g>
-          <App x={125} y={654} label="productpage" className="west-product"/><App x={365} y={654} label="reviews" className="west-reviews"/><App x={965} y={654} label="sleep" className="east-sleep"/><App x={1205} y={654} label="bookinfo" className="east-bookinfo"/>
 
-          <path d="M230 654V618H220V582" className="sidecar-line"/>
-          <path d="M470 654V618H220V582" className="sidecar-line"/>
-          <path d="M1070 654V618H1405V582" className="sidecar-line"/>
-          <path d="M1310 654V618H1405V582" className="sidecar-line"/>
-
-          <path d="M230 654V618H520V582" className="datapath-line"/>
-          <path d="M470 654V618H520V582" className="datapath-line"/>
-          <path d="M1070 654V618H1080V582" className="datapath-line"/>
-          <path d="M1310 654V618H1080V582" className="datapath-line"/>
-
-          <g className="remote"><rect x="650" y="604" width="300" height="108" rx="18" className="node-box remote-box"/><rect x="674" y="649" width="30" height="27" rx="4" className="lock"/><path d="M679 649V640A10 10 0 0 1 699 640V649" className="shackle"/><text x="722" y="651" className="node-title">Remote secrets</text><text x="722" y="681" className="node-sub">service discovery</text></g>
-          <path pathLength="1" d="M1405 582V658H950" className="draw discovery-line" markerEnd="url(#arrow)"/><path pathLength="1" d="M650 658H220V582" className="draw discovery-line" markerEnd="url(#arrow)"/>
-
-          <path pathLength="1" d="M1055 702V520" className="draw request-line req-1"/>
-          <path pathLength="1" d="M1055 520H520" className="draw request-line req-2" markerEnd="url(#arrow)"/>
-          <path pathLength="1" d="M520 520V618H230V702" className="draw request-line req-3" markerEnd="url(#arrow)"/>
-          <path pathLength="1" d="M230 702V618H520V555" className="draw response-line res-1"/>
-          <path pathLength="1" d="M520 555H1085" className="draw response-line res-2" markerEnd="url(#arrow-dark)"/>
-          <path pathLength="1" d="M1085 555V702" className="draw response-line res-3" markerEnd="url(#arrow-dark)"/>
-          <g className="gateway-caption">
-            <rect x="684" y="458" width="232" height="48" rx="14" className="gateway-caption-box" filter="url(#shadow)"/>
-            <text x="800" y="478" textAnchor="middle" className="gateway-caption-text">15443 • TLS passthrough</text>
-            <text x="800" y="496" textAnchor="middle" className="gateway-caption-text">workload mTLS preserved</text>
+          <g className="layer-lines">
+            <path d="M230 654V618H220V582" className="sidecar-line"/>
+            <path d="M470 654V618H220V582" className="sidecar-line"/>
+            <path d="M1070 654V618H1405V582" className="sidecar-line"/>
+            <path d="M1310 654V618H1405V582" className="sidecar-line"/>
+            <path d="M230 654V618H520V582" className="datapath-line"/>
+            <path d="M470 654V618H520V582" className="datapath-line"/>
+            <path d="M1070 654V618H1080V582" className="datapath-line"/>
+            <path d="M1310 654V618H1080V582" className="datapath-line"/>
+            <path pathLength="1" d="M1405 582V794H950" className="draw discovery-line" markerEnd="url(#arrow)"/>
+            <path pathLength="1" d="M650 794H220V582" className="draw discovery-line" markerEnd="url(#arrow)"/>
+            <path pathLength="1" d="M1070 654V582H1080" className="draw request-line req-1"/>
+            <path pathLength="1" d="M1080 582V527H655" className="draw request-line req-2" markerEnd="url(#arrow)"/>
+            <path pathLength="1" d="M655 527H520V582H230V654" className="draw request-line req-3" markerEnd="url(#arrow)"/>
+            <path pathLength="1" d="M335 678V555H655" className="draw response-line res-1"/>
+            <path pathLength="1" d="M655 555H945" className="draw response-line res-2" markerEnd="url(#arrow-dark)"/>
+            <path pathLength="1" d="M945 555V678H965" className="draw response-line res-3" markerEnd="url(#arrow-dark)"/>
+            <path pathLength="1" d="M540 879H1060" className="draw mesh-link"/>
           </g>
-          <circle cx="1055" cy="702" r="11" className="packet request-packet"/><circle cx="230" cy="702" r="11" className="packet response-packet"/>
 
-          <path pathLength="1" d="M375 878H1225" className="draw mesh-link"/>
-          <g className="mesh-badge"><rect x="220" y="862" width="320" height="34" rx="17" className="mesh-box"/><text x="380" y="885" textAnchor="middle" className="mesh-label">Istio mesh ID: bookinfo-mesh</text></g>
-          <g className="mesh-badge"><rect x="1060" y="862" width="320" height="34" rx="17" className="mesh-box"/><text x="1220" y="885" textAnchor="middle" className="mesh-label">Istio mesh ID: bookinfo-mesh</text></g>
-          <g className="summary"><rect x="610" y="906" width="380" height="44" rx="22" fill="#151515" filter="url(#shadow)"/><circle cx="649" cy="928" r="7" fill="#ee0000"/><text x="800" y="935" textAnchor="middle" className="summary-label">ONE LOGICAL ISTIO MESH</text></g>
+          <g className="layer-nodes">
+            <Operator x={154} y={444}/><Operator x={1339} y={444}/><Control x={105} y={472}/><Gateway x={385} y={472}/><Gateway x={945} y={472}/><Control x={1290} y={472}/>
+            <App x={125} y={654} label="productpage" className="west-product"/><App x={365} y={654} label="reviews" className="west-reviews"/><App x={965} y={654} label="sleep" className="east-sleep"/><App x={1205} y={654} label="bookinfo" className="east-bookinfo"/>
+            <g className="remote"><rect x="650" y="740" width="300" height="108" rx="18" className="node-box remote-box"/><rect x="674" y="785" width="30" height="27" rx="4" className="lock"/><path d="M679 785V776A10 10 0 0 1 699 776V785" className="shackle"/><text x="722" y="787" className="node-title">Remote secrets</text><text x="722" y="817" className="node-sub">service discovery</text></g>
+            <g className="gateway-caption">
+              <rect x="684" y="458" width="232" height="48" rx="14" className="gateway-caption-box" filter="url(#shadow)"/>
+              <text x="800" y="478" textAnchor="middle" className="gateway-caption-text">15443 • TLS passthrough</text>
+              <text x="800" y="496" textAnchor="middle" className="gateway-caption-text">workload mTLS preserved</text>
+            </g>
+            <g className="mesh-badge"><rect x="220" y="862" width="320" height="34" rx="17" className="mesh-box"/><text x="380" y="885" textAnchor="middle" className="mesh-label">Istio mesh ID: bookinfo-mesh</text></g>
+            <g className="mesh-badge"><rect x="1060" y="862" width="320" height="34" rx="17" className="mesh-box"/><text x="1220" y="885" textAnchor="middle" className="mesh-label">Istio mesh ID: bookinfo-mesh</text></g>
+            <g className="summary"><rect x="610" y="906" width="380" height="44" rx="22" fill="#151515" filter="url(#shadow)"/><circle cx="649" cy="928" r="7" fill="#ee0000"/><text x="800" y="935" textAnchor="middle" className="summary-label">ONE LOGICAL ISTIO MESH</text></g>
+          </g>
+
+          <g className="layer-packets">
+            <circle cx="1070" cy="654" r="11" className="packet request-packet"/>
+            <circle cx="335" cy="678" r="11" className="packet response-packet"/>
+          </g>
         </svg>
       </div>
 
