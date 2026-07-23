@@ -1,16 +1,40 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
-const chapters = [
-  ["Architecture", 0, 1.8, "Two Sail-managed control planes", "Each OpenShift cluster runs its own OSSM 3 control plane and east-west gateway."],
-  ["Shared trust", 2, 4.4, "A common root of trust", "Cluster intermediate CAs chain to one shared root CA for cross-cluster mTLS."],
-  ["Discovery", 4.8, 7.2, "Remote service discovery", "Remote secrets allow each istiod instance to discover services in the other cluster."],
-  ["mTLS request", 7.6, 11.1, "Request crosses both gateways", "Port 15443 uses TLS passthrough, preserving workload mTLS end to end."],
-  ["Response", 11.6, 14.8, "Encrypted response returns", "The response follows the reverse path without terminating workload mTLS."],
-  ["One mesh", 15.2, 17.4, "One logical Istio mesh", "Both clusters use the Istio mesh ID bookinfo-mesh with shared trust and discovery."],
-] as const;
+type Chapter = {
+  label: string;
+  start: number;
+  seek: number;
+  headline: string;
+  body?: string;
+  bullets?: readonly string[];
+};
+
+const chapters: Chapter[] = [
+  {label:"Architecture", start:0, seek:1.8, headline:"Two Sail-managed control planes", body:"Each OpenShift cluster runs its own OSSM 3 control plane and east-west gateway."},
+  {label:"Shared trust", start:2, seek:4.4, headline:"A common root of trust", body:"Cluster intermediate CAs chain to one shared root CA for cross-cluster mTLS."},
+  {label:"Discovery", start:4.8, seek:7.2, headline:"Remote service discovery", body:"Remote secrets allow each istiod instance to discover services in the other cluster."},
+  {label:"mTLS request", start:7.6, seek:11.1, headline:"Request crosses both gateways", body:"Port 15443 uses TLS passthrough, preserving workload mTLS end to end."},
+  {label:"Response", start:11.6, seek:14.8, headline:"Encrypted response returns", body:"The response follows the reverse path without terminating workload mTLS."},
+  {label:"One mesh", start:15.2, seek:17.4, headline:"One logical Istio mesh", body:"Both clusters use the Istio mesh ID bookinfo-mesh with shared trust and discovery."},
+  {label:"Comm flow", start:17.5, seek:20.2, headline:"Multi-cluster communication flow", bullets:[
+    "Client in the source cluster (e.g. East) starts the request",
+    "Local control plane (istiod) resolves the remote service via Remote Secrets",
+    "Traffic exits securely through the East-West Gateway (LoadBalancer) on port 15443",
+    "Destination service (e.g. West) responds, keeping the response under mTLS",
+  ]},
+  {label:"Protection", start:20.5, seek:23.2, headline:"Inter-cluster connection protection", bullets:[
+    "Shared trust: Shared Root CA + Intermediate CAs across clusters",
+    "End-to-end mTLS: service-to-service auth and encryption",
+    "Gateway security: East-West Gateway TLS AUTO_PASSTHROUGH (no mid-path decrypt)",
+    "Remote Secrets: secure discovery (kubeconfig for remote auth)",
+  ]},
+];
+
+const lastChapter = chapters.length - 1;
 
 function Cert({ x, y, width, label, root = false }: { x: number; y: number; width: number; label: string; root?: boolean }) {
   return <g className={`trust-node ${root ? "root-ca" : ""}`}>
@@ -62,6 +86,7 @@ function App({ x, y, label, className="" }: { x:number; y:number; label:string; 
 
 export default function Home() {
   const root = useRef<HTMLDivElement>(null);
+  const experience = useRef<HTMLElement>(null);
   const timeline = useRef<gsap.core.Timeline | null>(null);
   const chapterTween = useRef<gsap.core.Tween | null>(null);
   const scrubbing = useRef(false);
@@ -70,6 +95,7 @@ export default function Home() {
   const [active,setActive]=useState(0);
   const [reduced,setReduced]=useState(false);
   const [speed,setSpeed]=useState(1);
+  const [fullscreen,setFullscreen]=useState(false);
 
   useLayoutEffect(()=>{
     if(!root.current) return;
@@ -80,7 +106,7 @@ export default function Home() {
         gsap.set(".anim,.trust-node,.remote,.summary,.request-line,.response-line,.gateway-caption",{autoAlpha:1,y:0,scale:1});
         gsap.set(".draw",{strokeDasharray:1,strokeDashoffset:0});
         gsap.set(".packet",{autoAlpha:0});
-        setProgress(100); setActive(5); return;
+        setProgress(100); setActive(lastChapter); return;
       }
       gsap.set(".title-group",{autoAlpha:0,y:-12});
       gsap.set(".cluster",{autoAlpha:0,y:18,scale:.97,transformOrigin:"50% 50%"});
@@ -93,7 +119,7 @@ export default function Home() {
 
       const tl=gsap.timeline({paused:true,defaults:{ease:"power2.out"},onUpdate:()=>{
         const t=tl.time(); let idx=0;
-        chapters.forEach((c,i)=>{if(t>=c[1]) idx=i;});
+        chapters.forEach((c,i)=>{if(t>=c.start) idx=i;});
         setActive(a=>a===idx?a:idx);
         if(scrubbing.current) return;
         const p=Number((tl.progress()*100).toFixed(1));
@@ -157,30 +183,85 @@ export default function Home() {
         .to(".mesh-box",{fill:"#fff0f0",stroke:"#ee0000",strokeWidth:2.5,duration:.35,stagger:.08},15.45)
         .to(".summary",{autoAlpha:1,y:0,scale:1,duration:.55,ease:"back.out(1.5)"},15.75)
         .to(".cluster",{scale:1.008,duration:.28,stagger:.08,yoyo:true,repeat:1},16.35)
-        .to({}, {duration:.7});
-      timeline.current=tl; tl.play(0); setPlaying(true);
+        // Comm flow — keep path actors; dim trust / mesh chrome
+        .to(".trust-node,.trust-line,.operator,.mesh-badge,.summary,.mesh-link,.west-reviews,.east-bookinfo,.discovery-line",{opacity:.35,duration:.3},17.5)
+        .to(".control-node,.remote,.gateway-node,.gateway-caption,.apps,.east-sleep,.west-product",{opacity:1,duration:.3},17.5)
+        .to(".req-1,.req-2,.req-3,.res-1,.res-2,.res-3",{opacity:.85,duration:.3},17.5)
+        .to(".east-sleep .app-box,.west-product .app-box",{stroke:"#ee0000",fill:"#fff0f0",strokeWidth:3,duration:.25},17.5)
+        .to(".gateway-node .node-box,.control-node .node-box",{stroke:"#ee0000",fill:"#fff0f0",strokeWidth:3.5,duration:.25},17.5)
+        // Protection — keep trust, gateway passthrough, remote secrets; dim the rest
+        .to(".operator,.apps,.app-node,.mesh-badge,.summary,.mesh-link,.control-node,.discovery-line",{opacity:.35,duration:.3},20.5)
+        .to(".trust-node,.trust-line,.remote,.gateway-node,.gateway-caption",{opacity:1,duration:.3},20.5)
+        .to(".req-1,.req-2,.req-3,.res-1,.res-2,.res-3",{opacity:.28,duration:.3},20.5)
+        .to(".east-sleep .app-box,.west-product .app-box,.control-node .node-box",{stroke:"#c7c7c7",fill:"#fff",strokeWidth:2,duration:.25},20.5)
+        .to(".gateway-node .node-box",{stroke:"#ee0000",fill:"#fff0f0",strokeWidth:3.5,duration:.25},20.5)
+        .to(".remote-box",{stroke:"#ee0000",fill:"#fff0f0",strokeWidth:3,duration:.25},20.5)
+        .to(".root-ca",{scale:1.035,duration:.28,yoyo:true,repeat:1},20.7)
+        .to({}, {duration:2.3});
+      timeline.current=tl;
+      // Start stopped on Architecture (first step complete, no autoplay)
+      tl.time(chapters[0].seek,false);
+      setActive(0);
+      setProgress(Number((tl.progress()*100).toFixed(1)));
+      setPlaying(false);
     },root);
     return()=>{chapterTween.current?.kill();timeline.current=null;ctx.revert();};
   },[]);
 
-  const toggle=()=>{const tl=timeline.current;if(!tl||reduced)return;chapterTween.current?.kill();if(tl.progress()>=.999){tl.restart();setPlaying(true);}else if(tl.paused()){tl.play();setPlaying(true);}else{tl.pause();setPlaying(false);}};
-  const replay=()=>{const tl=timeline.current;if(!tl||reduced)return;chapterTween.current?.kill();tl.restart();setPlaying(true);};
-  const go=(i:number)=>{const tl=timeline.current;if(!tl||reduced)return;chapterTween.current?.kill();tl.pause();tl.time(Number(chapters[i][2]),false);setProgress(Number((tl.progress()*100).toFixed(1)));setActive(i);setPlaying(false);};
+  const chapterIndexAt=(t:number)=>{let idx=0;chapters.forEach((c,i)=>{if(t>=c.start) idx=i;});return idx;};
+  const playTo=(time:number)=>{
+    const tl=timeline.current;if(!tl||reduced)return;
+    chapterTween.current?.kill();
+    setPlaying(true);
+    chapterTween.current=tl.tweenTo(time,{onComplete:()=>{
+      setPlaying(false);
+      setProgress(Number((tl.progress()*100).toFixed(1)));
+      setActive(chapterIndexAt(tl.time()));
+    }});
+  };
+  const toggle=()=>{
+    const tl=timeline.current;if(!tl||reduced)return;
+    if(playing||!tl.paused()){chapterTween.current?.kill();tl.pause();setPlaying(false);return;}
+    const t=tl.time();
+    const idx=chapterIndexAt(t);
+    const atEnd=t>=chapters[idx].seek-0.05;
+    let next=atEnd?idx+1:idx;
+    if(next>lastChapter||tl.progress()>=.999){tl.time(0,false);next=0;}
+    playTo(chapters[next].seek);
+  };
+  const replay=()=>{const tl=timeline.current;if(!tl||reduced)return;tl.pause();tl.time(0,false);playTo(chapters[0].seek);};
+  const go=(i:number)=>{const tl=timeline.current;if(!tl||reduced)return;chapterTween.current?.kill();tl.pause();tl.time(chapters[i].seek,false);setProgress(Number((tl.progress()*100).toFixed(1)));setActive(i);setPlaying(false);};
   const scrub=(v:number)=>{const tl=timeline.current;if(!tl||reduced)return;chapterTween.current?.kill();tl.pause().progress(v/100);setProgress(v);setPlaying(false);};
   const beginScrub=()=>{if(reduced)return;scrubbing.current=true;timeline.current?.pause();setPlaying(false);};
   const endScrub=()=>{scrubbing.current=false;};
   const changeSpeed=(s:number)=>{setSpeed(s);timeline.current?.timeScale(s);};
+  const toggleFullscreen=()=>{
+    const el=experience.current;
+    if(!el) return;
+    if(document.fullscreenElement) void document.exitFullscreen();
+    else void el.requestFullscreen();
+  };
 
-  useEffect(()=>{const key=(e:KeyboardEvent)=>{if((e.target as HTMLElement)?.matches("button,input,textarea,select"))return;if(e.code==="Space"){e.preventDefault();toggle();}if(e.key==="ArrowRight")go(Math.min(5,active+1));if(e.key==="ArrowLeft")go(Math.max(0,active-1));if(e.key.toLowerCase()==="r")replay();};window.addEventListener("keydown",key);return()=>window.removeEventListener("keydown",key);});
+  useEffect(()=>{
+    const sync=()=>setFullscreen(document.fullscreenElement===experience.current);
+    document.addEventListener("fullscreenchange",sync);
+    return()=>document.removeEventListener("fullscreenchange",sync);
+  },[]);
+
+  useEffect(()=>{const key=(e:KeyboardEvent)=>{if((e.target as HTMLElement)?.matches("button,input,textarea,select"))return;if(e.code==="Space"){e.preventDefault();toggle();}if(e.key==="ArrowRight")go(Math.min(lastChapter,active+1));if(e.key==="ArrowLeft")go(Math.max(0,active-1));if(e.key.toLowerCase()==="r")replay();if(e.key.toLowerCase()==="f"){e.preventDefault();toggleFullscreen();}};window.addEventListener("keydown",key);return()=>window.removeEventListener("keydown",key);});
 
   const chapter=chapters[active];
+  const chapterTotal=String(chapters.length).padStart(2,"0");
   return <main className="page" ref={root}>
     <header className="header">
       <div><p>OpenShift Service Mesh 3</p><h1>Istio mesh ID architecture</h1></div>
-      <div className="tags"><span>OSSM 3</span><span>Sail operator</span><span>Istio</span></div>
+      <div className="tags">
+        <Link className="tag-link" href="/mtls/">← mTLS primer</Link>
+        <span>OSSM 3</span><span>Sail operator</span><span>Istio</span>
+      </div>
     </header>
 
-    <section className="experience" aria-label="Interactive Istio mesh architecture animation">
+    <section ref={experience} className="experience" aria-label="Interactive Istio mesh architecture animation">
       <div className="stage">
         <svg viewBox="0 0 1600 960" className="diagram" role="img" aria-labelledby="svg-title svg-desc">
           <title id="svg-title">OpenShift Service Mesh 3 multi-cluster Istio mesh ID architecture</title>
@@ -248,11 +329,17 @@ export default function Home() {
       </div>
 
       <div className="controls">
-        <div className="transport"><button className="primary" onClick={toggle} disabled={reduced}>{playing?"Ⅱ  Pause":"▶  Play"}</button><button onClick={replay} disabled={reduced}>↻ Replay</button>{[.5,1,2].map(s=><button key={s} onClick={()=>changeSpeed(s)} disabled={reduced} style={s===speed?{borderColor:"var(--red)",background:"var(--soft)",color:"var(--dark-red)"}:{}}>{s===1?"1":s<1?"½":"2"}×</button>)}</div>
-        <div className="chapter-copy" aria-live="polite"><p>{String(active+1).padStart(2,"0")} / 06</p><h2>{chapter[3]}</h2><span>{chapter[4]}</span></div>
-        <div className="timeline"><label htmlFor="progress">Timeline <span>{Math.round(progress)}%</span></label><input id="progress" type="range" min="0" max="100" step=".1" value={progress} onPointerDown={beginScrub} onPointerUp={endScrub} onPointerCancel={endScrub} onChange={e=>scrub(Number(e.target.value))} disabled={reduced}/><div className="chapter-buttons">{chapters.map((c,i)=><button key={c[0]} onClick={()=>go(i)} className={i===active?"active":""} disabled={reduced} aria-current={i===active?"step":undefined}><b>{String(i+1).padStart(2,"0")}</b>{c[0]}</button>)}</div></div>
+        <div className="transport"><button className="primary" onClick={toggle} disabled={reduced}>{playing?"Ⅱ  Pause":"▶  Play"}</button><button onClick={replay} disabled={reduced}>↻ Replay</button>{[.5,1,2].map(s=><button key={s} onClick={()=>changeSpeed(s)} disabled={reduced} style={s===speed?{borderColor:"var(--red)",background:"var(--soft)",color:"var(--dark-red)"}:{}}>{s===1?"1":s<1?"½":"2"}×</button>)}<button onClick={toggleFullscreen} aria-pressed={fullscreen} title={fullscreen?"Exit fullscreen (F)":"Fullscreen (F)"}>{fullscreen?"⛶ Exit":"⛶ Full"}</button></div>
+        <div className="chapter-copy" aria-live="polite">
+          <p>{String(active+1).padStart(2,"0")} / {chapterTotal}</p>
+          <h2>{chapter.headline}</h2>
+          {chapter.bullets
+            ? <ol className="chapter-bullets">{chapter.bullets.map(b=><li key={b}>{b}</li>)}</ol>
+            : <span>{chapter.body}</span>}
+        </div>
+        <div className="timeline"><label htmlFor="progress">Timeline <span>{Math.round(progress)}%</span></label><input id="progress" type="range" min="0" max="100" step=".1" value={progress} onPointerDown={beginScrub} onPointerUp={endScrub} onPointerCancel={endScrub} onChange={e=>scrub(Number(e.target.value))} disabled={reduced}/><div className="chapter-buttons">{chapters.map((c,i)=><button key={c.label} onClick={()=>go(i)} className={i===active?"active":""} disabled={reduced} aria-current={i===active?"step":undefined}><b>{String(i+1).padStart(2,"0")}</b>{c.label}</button>)}</div></div>
       </div>
     </section>
-    <footer><span>{reduced?"Reduced-motion mode: complete architecture shown.":"Keyboard: Space play/pause • ←/→ chapters • R replay"}</span><span>Editable SVG • GSAP timeline • <a href="/">Talks</a></span></footer>
+    <footer><span>{reduced?"Reduced-motion mode: complete architecture shown.":"Keyboard: Space next step / pause • ←/→ chapters • R replay • F fullscreen"}</span><span>Editable SVG • GSAP timeline • <a href="/">Talks</a></span></footer>
   </main>;
 }
