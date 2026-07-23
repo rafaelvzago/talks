@@ -8,5 +8,6 @@ Process: see `docs/agents/sdlc.md` for the default agentic SDLC.
 
 - [x] Grill + PRD #20 + ticket #21
 - [x] Implement Comm flow + Protection chapters (`feat/ossm-breakdown-chapters`)
+- [x] Step-00 mTLS primer (#23) ahead of Architecture
 - [ ] Local preview approval
-- [ ] Ship PR / close #21
+- [ ] Ship PR #22 / close #21 #23
