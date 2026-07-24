@@ -224,7 +224,8 @@ export default function MtlsPrimerPage() {
       <div><p>OpenShift Service Mesh 3</p><h1>mTLS primer</h1></div>
       <div className="tags">
         <span>Step 00</span><span>mTLS</span>
-        <Link className="tag-link" href="/">Multi-cluster flow →</Link>
+        <Link className="tag-link" href="/">← Hub</Link>
+        <Link className="tag-link" href="/flow/">Multi-cluster flow →</Link>
       </div>
     </header>
 
@@ -319,7 +320,7 @@ export default function MtlsPrimerPage() {
           <p>00 · {String(active+1).padStart(2,"0")} / {chapterTotal}</p>
           <h2>{chapter.headline}</h2>
           <span>{chapter.body}</span>
-          {onLast && <Link className="flow-cta" href="/">Continue to multi-cluster flow →</Link>}
+          {onLast && <Link className="flow-cta" href="/flow/">Continue to multi-cluster flow →</Link>}
         </div>
         <div className="timeline">
           <label htmlFor="mtls-progress">Timeline <span>{Math.round(progress)}%</span></label>
@@ -330,7 +331,7 @@ export default function MtlsPrimerPage() {
     </section>
     <footer>
       <span>{reduced?"Reduced-motion mode: final mTLS summary shown.":"Keyboard: Space next step / pause • ←/→ chapters • R replay • F fullscreen"}</span>
-      <span><Link href="/">Multi-cluster flow</Link> · <a href="/">Talks</a></span>
+      <span><Link href="/">Hub</Link> · <Link href="/flow/">Multi-cluster flow</Link> · <a href="/">Talks</a></span>
     </footer>
   </main>;
 }

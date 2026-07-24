@@ -25,6 +25,8 @@ must("ai/claude-code/claude-code-open-source.html");
 must("ai/claude-code/claude-code-open-source-en.html");
 
 must("tdc/2026/acm-ossm/index.html");
+must("tdc/2026/acm-ossm/mtls/index.html");
+must("tdc/2026/acm-ossm/flow/index.html");
 must("tdc/2026/painel-cloud/index.html");
 
 assert.match(
