@@ -10,7 +10,10 @@ Presentations and talk material by **Rafael Zago** (Senior Software Automation E
 |------|---------|
 | `/` | Talks catalog (PT/EN) |
 | `/ai/claude-code/` | Claude Code for open source — HTML slides (PT-BR + EN) |
-| `/tdc/2026/acm-ossm/` | OSSM multi-cluster interactive flow (Next.js) |
+| `/tdc/2026/acm-ossm/` | OSSM hub (mTLS primer + multi-cluster flow) |
+| `/tdc/2026/acm-ossm/mtls/` | mTLS primer animation |
+| `/tdc/2026/acm-ossm/flow/` | Multi-cluster Istio mesh animation |
+| `ossm.rafaelvzago.com` | Same Pages site; root redirects to OSSM hub |
 | `/tdc/2026/painel-cloud/` | TDC Floripa 2026 panel runbook (Next.js) |
 
 ## Run locally

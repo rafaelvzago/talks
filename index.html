@@ -145,19 +145,12 @@ footer a { color: var(--ctp-overlay0); }
       <h2 data-lang="pt">TDC 2026</h2>
       <h2 data-lang="en">TDC 2026</h2>
       <div class="cards">
-        <a class="card" href="tdc/2026/acm-ossm/mtls/">
-          <h3 data-lang="pt">mTLS primer</h3>
-          <h3 data-lang="en">mTLS primer</h3>
-          <p class="meta">Interactive · Step 00</p>
-          <p data-lang="pt">Animação progressiva de mTLS sem pressupor conhecimento de TLS.</p>
-          <p data-lang="en">Progressive mTLS animation assuming no prior TLS knowledge.</p>
-        </a>
         <a class="card" href="tdc/2026/acm-ossm/">
-          <h3 data-lang="pt">OSSM multi-cluster flow</h3>
-          <h3 data-lang="en">OSSM multi-cluster flow</h3>
-          <p class="meta">Interactive · Next.js</p>
-          <p data-lang="pt">Diagrama animado do OpenShift Service Mesh 3 em multi-cluster.</p>
-          <p data-lang="en">Animated OpenShift Service Mesh 3 multi-cluster diagram.</p>
+          <h3 data-lang="pt">OSSM — mTLS + multi-cluster</h3>
+          <h3 data-lang="en">OSSM — mTLS + multi-cluster</h3>
+          <p class="meta">Hub · ossm.rafaelvzago.com</p>
+          <p data-lang="pt">Escolha o primer de mTLS ou a animação multi-cluster do Service Mesh 3.</p>
+          <p data-lang="en">Choose the mTLS primer or the Service Mesh 3 multi-cluster animation.</p>
         </a>
         <a class="card" href="tdc/2026/painel-cloud/">
           <h3 data-lang="pt">Painel — arquitetura resiliente</h3>
@@ -177,6 +170,17 @@ footer a { color: var(--ctp-overlay0); }
 </div>
 
 <script>
+// ossm.rafaelvzago.com shares this Pages site — send that host to the OSSM hub.
+(function () {
+  var host = location.hostname;
+  if (host === 'ossm.rafaelvzago.com' || host === 'www.ossm.rafaelvzago.com') {
+    var path = location.pathname || '/';
+    if (path === '/' || path === '/index.html') {
+      location.replace('/tdc/2026/acm-ossm/');
+      return;
+    }
+  }
+})();
 function setLang(lang) {
   document.querySelectorAll('[data-lang]').forEach(function(el) {
     el.classList.toggle('show', el.dataset.lang === lang);
